@@ -669,8 +669,8 @@ snippet cont
 		${0}
 	end
 snippet bef
-	before :${1:each} do
-		${0}
+	before ${1}do
+		${1}
 	end
 snippet aft
 	after :${1:each} do
@@ -680,6 +680,12 @@ snippet let
 	let(:${1:object}) { ${0} }
 snippet let!
 	let!(:${1:object}) { ${0} }
+
+snippet letc
+	let(:${1:object}) { create(:$1, ${0}) }
+snippet letbs
+	let(:${1:object}) { build_stubbed(:$1, ${0}) }
+
 snippet subj
 	subject { ${0} }
 snippet s.
@@ -720,3 +726,5 @@ snippet agg
 	aggregate_failures '${1:message}' do
 		${0}
 	end
+
+
