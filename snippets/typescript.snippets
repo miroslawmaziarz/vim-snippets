@@ -1,5 +1,20 @@
 extends javascript
 
+snippet cl
+	console.log($1)
+
+snippet clv
+	console.log("$1:", $1)
+
+snippet ce
+	console.error($1)
+
+snippet cw
+	console.warn($1)
+
+snippet ct
+	console.table($1)
+
 snippet tconst "ts const"
 	const ${1}: ${2:any} = ${3};
 	${0}
@@ -41,3 +56,449 @@ snippet tclax "ts class extends"
 		}
 		${0}
 	}
+
+snippet impf
+	import $1 from "${2:./}${3:$1}"
+
+snippet impn
+	import { $1 } from "$2"
+
+snippet impa
+	import * as $1 from "$2`!p snip.rv=lowerdash(t[1])`"
+
+snippet impp
+	import "$1"
+
+snippet icn
+	import cn from "classnames"
+
+snippet ism
+	import ${2:styles} from "./${1:`!v expand('%:t:r')`}.module.scss"
+
+snippet exp
+	export { default } from "./${1:`!v expand('%:p:h:t')`}"
+
+snippet expf
+	export $1 from "${2:./}$1"
+
+snippet expn
+	export { $1 } from "$2"
+
+snippet expd
+	export { default as $1 } from "${2:./}$1"
+
+snippet expa
+	export * from "$1"
+
+# ==========================================
+# Test Snippets
+#
+snippet rtf
+	import React from "react"
+	import { render } from "@testing-library/react"
+
+	import ${1:`!v expand('%:t:r')`} from "../$1"
+
+	describe("$1", () => {
+		it("should $2", () => {
+			$3
+		})
+	})
+
+snippet rhtf "React Hooks Test File" b
+	import { renderHook } from "@testing-library/react-hooks"
+
+	import $2 from "../${1:`!v expand('%:t:r')`}"
+
+	describe("$1", () => {
+		it("should $3", () => {
+		$4
+	})
+	})
+
+snippet desc "describe a test" b
+	describe("$1", () => {
+		it("should $2", () => {
+			$3
+		})
+	})
+
+snippet it "create a test block" b
+	it("should $1", () => {
+		$2
+	})
+
+snippet todo "it.todo()" b
+	it.todo("should $1")
+
+snippet es "expect(container).toMatchSnapshot()" b
+	expect(${1:container}).toMatchSnapshot()$0
+
+snippet intf "create interface for file" b
+	export interface ${1:`!v expand('%:t:r')`}$2 {
+	}
+
+# ==========================================
+# React Snippets
+#
+snippet rce "react class exported" b
+	import React, { Component } from "react"
+
+	export default class ${1:`!v expand('%:t:r')`} extends Component {
+		public render() {
+			return ${2:null}$0
+		}
+	}
+
+snippet rcep "react class exported (with prop interface)" b
+	import React, { Component } from "react"
+
+	export interface $1Props {
+	}
+
+	export default class ${1:`!v expand('%:t:r')`} extends Component<$1Props> {
+		public render() {
+			return ${2:null}$0
+		}
+	}
+
+snippet rceps "react class exported (with prop and state interfaces)" b
+	import React, { Component } from "react"
+
+	export interface $1Props {
+	}
+
+	export interface $1State {
+	}
+
+	export default class ${1:`!v expand('%:t:r')`} extends Component<$1Props, $1State> {
+		constructor(props: $1Props) {
+			super(props)
+
+			this.state = {}
+		}
+
+		public render() {
+			return ${2:null}$0
+		}
+	}
+
+snippet rcc "React class component" b
+	class $1 extends Component {
+		public render() {
+			return null$0
+		}
+	}
+
+snippet rcon "React class constructor" b
+	constructor(props: ${1:`!v expand('%:t:r')`}Props) {
+		super(props)
+
+		this.state = ${1:{}}$0
+	}
+
+snippet sfce
+	import React, { ReactElement } from "react"
+
+	export default function ${1:`!v expand('%:t:r')`}(): ReactElement | null {
+	  return ${2:null}
+	}
+
+# react class function
+snippet rcf
+	$1 = (${2:event}) => {
+		$3
+	}
+
+# ==========================================
+# Component Specs and Lifecycle Section
+#
+snippet sdp "static default props" b
+	public static defaultProps = {
+		$2
+	}
+
+snippet sdpt "static default props (typed)" b
+	public static defaultProps: DefaultProps = {
+		$2
+	}
+
+snippet cdp "component default props" b
+	${1:`!v expand('%:t:r')`}.defaultProps = {
+		$2
+	}
+
+snippet cdpt "component default props (typed)" b
+	const defaultProps: $1DefaultProps = {
+		$2
+	}
+
+	${3:`!v expand('%:t:r')`}.defaultProps = defaultProps
+
+snippet spt "static prop types" b
+	public static propTypes = {
+		${1:className}: ${2:PropTypes.string},$0
+	}
+
+snippet cpt "component prop types" b
+	${1:`!v expand('%:t:r')`}.propTypes = {
+		${2:className}: ${3:PropTypes.string},$0
+	}
+
+snippet gds "get derived state from props" b
+	public static getDerivedStateFromProps(nextProps: ${1:`!v expand('%:t:r')`}Props, prevState: $1State) {
+		return ${2:null}$0
+	}
+
+snippet gde "get derived state from props" b
+	public static getDerivedStateFromError(error: Error) {
+		return ${1:null}$0
+	}
+
+snippet cdm "component did mount" b
+	public componentDidMount() {
+		$1
+	}
+
+snippet scu "should component update" b
+	public shouldComponentUpdate(nextProps: ${1:`!v expand('%:t:r')`}Props, nextState: $1State) {
+		return ${1:true}$0
+	}
+
+snippet gsbu "get snapshot before update" b
+	public getSnapshotBeforeUpdate(prevProps: ${1:`!v expand('%:t:r')`}Props, prevState: $1State) {
+		return ${2:null}$0
+	}
+
+snippet cdu "component did update" b
+	public componentDidUpdate(prevProps: ${1:`!v expand('%:t:r')`}Props, prevState: $1State, ${2:snapshot: any}) {
+		$3
+	}
+
+snippet cdc "component did catch" b
+	public componentDidCatch(error: Error, info: ErrorInfo) {
+		$1
+	}
+
+snippet cwum "component will unmount" b
+	public componentWillUnmount() {
+		$1
+	}
+
+snippet r.me "React.MouseEvent" w
+	React.MouseEvent$0
+
+snippet r.te "React.TouchEvent" w
+	React.TouchEvent$0
+
+snippet r.ke "React.KeyboardEvent" w
+	React.KeyboardEvent$0
+
+snippet r.ce "React.ChangeEvent" w
+	React.ChangeEvent$0
+
+snippet r.fo "React.FocusEvent" w
+	React.FocusEvent$0
+
+snippet r.meh "React.MouseEventHandler" w
+	React.MouseEventHandler$0
+
+snippet r.teh "React.TouchEventHandler" w
+	React.TouchEventHandler$0
+
+snippet r.keh "React.KeyboardEventHandler" w
+	React.KeyboardEventHandler$0
+
+snippet r.ceh "React.ChangeEventHandler" w
+	React.ChangeEventHandler$0
+
+snippet r.foh "React.FocusEventHandler" w
+	React.FocusEventHandler$0
+
+
+# ==========================================
+# Hooks and effects
+#
+
+snippet useS "useState()" b
+	const [$1, set$4`!p snip.rv=upperfirst(t[1])`] = useState$3($2)$0
+
+snippet useE "useEffect()" b
+	useEffect(() => {
+		$1$0
+	}$2)
+
+snippet useEA "useEffect() async" b
+	useEffect(() => {
+	  let cancelled = false
+
+	  ;(async function ${4:doWork}(): Promise<${5:void}> {
+	    ${1:// async work here}
+	    if (cancelled) {
+	      return
+	    }
+
+	    $2
+	  })()
+
+	  return () => {
+	    cancelled = true
+	  }
+	}, [$3])
+
+snippet useC "useContext()" b
+	${5:const ${1:context} =} useContext$3($2)$0
+
+snippet useRed "useReducer(reducer, initialValue)" b
+	const [${4:state}, ${5:dispatch}] = useReducer<typeof $2>(${2:reducer}, ${3:null})
+
+snippet useRedUT "use reducer untyped" b
+	const [${3:state}, ${4:dispatch}] = useReducer($1, ${2:{}})
+
+snippet useCB "useCallback(fn, inputs)" b
+	const ${1:callback} = useCallback(($2) => ${3:{
+		$4
+	}}, [$5])
+
+snippet useM "useMemo(fn, inputs)" b
+	const ${1:memoized} = useMemo(() => ${2:{
+		$3
+	}}, [$4])
+
+snippet useR "useRef(defaultValue)" b
+	const ${1:ref} = useRef$3(${2:null})$0
+
+snippet useI "useImperitiveHandle(ref, createHandle, [inputs])" b
+	useImperitiveHandle(${1:ref}, ${4:() => ({
+		$2
+	})}, ${5:[$3]})
+
+snippet useL "useLayoutEffect()" b
+	useLayoutEffect(() => {
+		$1
+	})
+
+snippet useD "useDebugValue(value)" b
+	useDebugValue(${1:null})
+
+# ==========================================
+# "Inline" versions of hooks
+#
+
+#priority -1
+snippet useC "useContext()" w
+	useContext$2($1)
+
+snippet useCB "useCallback(fn, inputs)" w
+	useCallback(($1) => ${2:{
+		$3
+	}}, [$4])
+
+snippet useM "useMemo(fn, inputs)" w
+	useMemo(() => ${1:{
+		$2
+	}}, [$3])
+
+snippet useR "useRef(defaultValue)" w
+	useRef$2(${1:null})$0
+
+#	priority 0
+
+# ==========================================
+# Prop Types Section (only for legacy)
+#
+
+# Inline prop types
+
+snippet pt.a
+	PropTypes.array
+
+snippet pt.ar
+	PropTypes.array.isRequired
+
+snippet pt.b
+	PropTypes.bool
+
+snippet pt.br
+	PropTypes.bool.isRequired
+
+snippet pt.f
+	PropTypes.func
+
+snippet pt.fr
+	PropTypes.func.isRequired
+
+snippet pt.nu
+	PropTypes.number
+
+snippet pt.nur
+	PropTypes.number.isRequired
+
+snippet pt.o
+	PropTypes.object
+
+snippet pt.or
+	PropTypes.object.isRequired
+
+snippet pt.s
+	PropTypes.string
+
+snippet pt.sr
+	PropTypes.string.isRequired
+
+snippet pt.no
+	PropTypes.node
+
+snippet pt.nor
+	PropTypes.node.isRequired
+
+snippet pt.e
+	PropTypes.element
+
+snippet pt.er
+	PropTypes.element.isRequired
+
+snippet pt.ao
+	PropTypes.arrayOf(${1:PropTypes.string})
+
+snippet pt.aor
+	PropTypes.arrayOf(${1:PropTypes.string}).isRequired
+
+snippet pt.io
+	PropTypes.instanceOf(${1:PropTypes.string})
+
+snippet pt.ior
+	PropTypes.instanceOf(${1:PropTypes.string}).isRequired
+
+snippet pt.oo
+	PropTypes.objectOf(${1:PropTypes.string})
+
+snippet pt.oor
+	PropTypes.objectOf(${1:PropTypes.string}).isRequired
+
+snippet pt.one
+	PropTypes.oneOf(["$1"$2])
+
+snippet pt.oner
+	PropTypes.oneOf(["$1"$2]).isRequired
+
+snippet pt.onet
+	PropTypes.oneOfType([
+		$1
+	])
+
+snippet pt.onetr
+	PropTypes.oneOfType([
+		$1
+	]).isRequired
+
+snippet pt.sh
+	PropTypes.shape({
+		$1
+	})
+
+snippet pt.shr
+	PropTypes.shape({
+		$1
+	}).isRequired
+

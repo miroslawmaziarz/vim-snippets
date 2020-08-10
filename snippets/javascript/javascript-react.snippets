@@ -96,3 +96,102 @@ snippet prp i
 	this.props.${1}
 snippet ste i
 	this.state.${1}
+
+# ==========================================
+# Prop Types Section
+#
+
+# Inline prop types
+# "PropTypes.array" w
+snippet pt.a 
+	PropTypes.array
+
+# "PropTypes.array.isRequired" w
+	PropTypes.array.isRequired
+
+snippet pt.b
+	PropTypes.bool
+
+snippet pt.br
+	PropTypes.bool.isRequired
+
+snippet pt.f
+	PropTypes.func
+
+snippet pt.fr
+	PropTypes.func.isRequired
+
+snippet pt.nu
+	PropTypes.number
+
+snippet pt.nur
+	PropTypes.number.isRequired
+
+snippet pt.o
+	PropTypes.object
+
+snippet pt.or
+	PropTypes.object.isRequired
+
+snippet pt.s
+	PropTypes.string
+
+snippet pt.sr
+	PropTypes.string.isRequired
+
+snippet pt.no
+	PropTypes.node
+
+snippet pt.nor
+	PropTypes.node.isRequired
+
+snippet pt.e
+	PropTypes.element
+
+snippet pt.er
+	PropTypes.element.isRequired
+
+snippet pt.ao
+	PropTypes.arrayOf(${1:PropTypes.string})
+
+snippet pt.aor
+	PropTypes.arrayOf(${1:PropTypes.string}).isRequired
+
+snippet pt.io
+	PropTypes.instanceOf(${1:PropTypes.string})
+
+snippet pt.ior
+	PropTypes.instanceOf(${1:PropTypes.string}).isRequired
+
+snippet pt.oo
+	PropTypes.objectOf(${1:PropTypes.string})
+
+snippet pt.oor
+	PropTypes.objectOf(${1:PropTypes.string}).isRequired
+
+snippet pt.one
+	PropTypes.oneOf(['$1'$2])
+
+snippet pt.oner
+	PropTypes.oneOf(['$1'$2]).isRequired
+
+snippet pt.onet
+	PropTypes.oneOfType([
+		$1
+	])
+
+snippet pt.onetr
+	PropTypes.oneOfType([
+		$1
+	]).isRequired
+
+snippet pt.sh
+	PropTypes.shape({
+		$1
+	})
+
+snippet pt.shr
+	PropTypes.shape({
+		$1
+	}).isRequired
+
