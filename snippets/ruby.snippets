@@ -698,6 +698,8 @@ snippet expb
 	expect { ${1:object} }.to ${0}
 snippet experr
 	expect { ${1:object} }.to raise_error ${2:StandardError}, /${0:message_regex}/
+snippet exprec
+	expect(${1:object}).to receive(${2:method})
 snippet allow
 	allow(${1:object}).to ${0}
 snippet shared
